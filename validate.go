@@ -33,7 +33,7 @@ func ValidateForm(r *http.Request, p interface{}) error {
 			fieldn := formStruct.Field(n)
 			// set form data to field
 			// equivalent of form.Value = HttpFormValue[0]
-			fieldn.Field(3).Set(reflect.ValueOf(HttpFormValue[0]))
+			fieldn.Field(1).Set(reflect.ValueOf(HttpFormValue[0]))
 		}
 	}
 
@@ -46,7 +46,7 @@ func ValidateForm(r *http.Request, p interface{}) error {
 		}
 		for _, validator := range *field.Validators {
 			if err := validator(field, r.Context()); err != nil {
-				fieldn.Field(4).Set(reflect.ValueOf(err))
+				fieldn.Field(2).Set(reflect.ValueOf(err))
 				FormError = err
 				break
 			}

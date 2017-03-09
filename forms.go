@@ -14,8 +14,6 @@ type ValidatorsList []ValidatorFunc
 // A general purpose form  field struct
 type FormField struct {
 	Name       string
-	Type       string
-	Label      string
 	Value      string
 	Error      error
 	Validators *ValidatorsList
