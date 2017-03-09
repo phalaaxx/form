@@ -41,3 +41,9 @@ func (f FormField) GetBool() (bool, error) {
 	// placeholder
 	return false, nil
 }
+
+// GetChecked returns true if checkbox has been selected
+// only works if checkbox value is "on" when selected
+func (f FormField) GetChecked() bool {
+	return f.Value == "on"
+}
