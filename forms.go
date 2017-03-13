@@ -29,9 +29,25 @@ func (f FormField) GetInt() (int, error) {
 	return strconv.Atoi(f.Value)
 }
 
+// Int converts FormField.Value to integer value and ignores errors
+func (f FormField) Int() int {
+	if result, err := strconv.Atoi(f.Value); err == nil {
+		return result
+	}
+	return 0
+}
+
 // GetFloat returns FormField.Value as float
 func (f FormField) GetFloat() (float64, error) {
 	return strconv.ParseFloat(f.Value, 64)
+}
+
+// Float converts FormField.Value to float and ignores errors
+func (f FormField) Float() float64 {
+	if result, err := strconv.ParseFloat(f.Value, 64); err == nil {
+		return result
+	}
+	return 0.0
 }
 
 // GetBool returns boolean value for checkbox fields
