@@ -50,6 +50,24 @@ func validLength(min, max int) ValidatorFunc {
 	}
 }
 
+// validFieldIn verifies if item is within the list of items
+func validFieldIn(list []string) ValidatorFunc {
+	var EInvalidValue = errors.New(
+		fmt.Sprintf(
+			"field value must be one of: %s",
+			strings.Join(list, ","),
+		),
+	)
+	return func(field FormField, ctx context.Context) error {
+		for _, item := range list {
+			if item == field.GetString() {
+				return nil
+			}
+		}
+		return EInvalidValue
+	}
+}
+
 // validInt returns error if field does not contain a valid integer value
 func validInt(field FormField, ctx context.Context) error {
 	_, err := field.GetInt()
