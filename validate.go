@@ -25,12 +25,16 @@ func ValidateForm(r *http.Request, p interface{}) error {
 	for HttpFormField, HttpFormValue := range r.Form {
 		for n := 0; n < formStruct.NumField(); n++ {
 			fieldt := formStruct.Type().Field(n)
-			/* only proceed if field name or tag matches that of form field */
-			if fieldt.Name != HttpFormField && fieldt.Tag.Get("form") != HttpFormField {
-				continue
-			}
 			/* get n-th field */
 			fieldn := formStruct.Field(n)
+			/* only proceed if field name or tag matches that of form field */
+			if fieldn.Field(0).String() != HttpFormField {
+				if fieldt.Name != HttpFormField {
+					if fieldt.Tag.Get("form") != HttpFormField {
+						continue
+					}
+				}
+			}
 			/* set form data to field
 			   equivalent of form.Value = HttpFormValue[0] */
 			fieldn.Field(1).Set(reflect.ValueOf(HttpFormValue[0]))
