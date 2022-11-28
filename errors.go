@@ -4,7 +4,7 @@ import (
 	"errors"
 )
 
-// pre-defined form errors
+/* pre-defined form errors */
 var (
 	EInvalidMethod     = errors.New("Invalid method")
 	EInvalidIntValue   = errors.New("Field value must be integer.")
