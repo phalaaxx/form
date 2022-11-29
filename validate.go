@@ -48,12 +48,16 @@ func ValidateForm(r *http.Request, p interface{}) error {
 		if field.Validators == nil {
 			continue
 		}
+		/* prepare list of FormField errors */
+		var errors []error
 		for _, validator := range *field.Validators {
 			if err := validator(field, r.Context()); err != nil {
-				fieldn.Field(4).Set(reflect.ValueOf(err))
+				errors = append(errors, err)
 				FormError = err
-				break
 			}
+		}
+		if len(errors) != 0 {
+			fieldn.Field(1).Set(reflect.ValueOf(errors))
 		}
 	}
 
