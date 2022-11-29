@@ -14,9 +14,29 @@ type ValidatorsList []ValidatorFunc
 /* A general purpose form  field struct */
 type FormField struct {
 	Name       string
+	Label      string
 	Value      string
+	Class      string
 	Error      error
 	Validators *ValidatorsList
+}
+
+/* SetValidators configures validators list in form field */
+func (f FormField) SetValidators(validators *ValidatorsList) FormField {
+	f.Validators = validators
+	return f
+}
+
+/* SetLabel configures form label */
+func (f FormField) SetLabel(label string) FormField {
+	f.Label = label
+	return f
+}
+
+/* SetClass configures class name in form field */
+func (f FormField) SetClass(class string) FormField {
+	f.Class = class
+	return f
 }
 
 /* GetString returns FormField.Value as string */
