@@ -81,7 +81,7 @@ func ValidBetween(min, max int) ValidatorFunc {
 	return func(field FormField, ctx context.Context) error {
 		value, err := field.GetInt()
 		if err != nil {
-			return err
+			return EInvalidInteger
 		}
 		if value < min || value > max {
 			return EInvalidInterval
